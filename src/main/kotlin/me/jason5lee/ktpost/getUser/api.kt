@@ -13,7 +13,7 @@ internal fun getUserApi(getUser: GetUser) = api(
   )
   val output = getUser(input).getOrElse {
     return@api when (it) {
-      is Failure.UserNotFound -> ctx.respondUserNotFound()
+      Failure.UserNotFound -> ctx.respondUserNotFound()
     }
   }
 
