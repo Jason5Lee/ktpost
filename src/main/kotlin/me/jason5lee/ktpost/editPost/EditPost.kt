@@ -1,15 +1,13 @@
 package me.jason5lee.ktpost.editPost
 
-import me.jason5lee.ktpost.common.PostContent
-import me.jason5lee.ktpost.common.PostId
-import me.jason5lee.ktpost.common.UserId
+import me.jason5lee.ktpost.common.*
 import me.jason5lee.resukt.Result
 import me.jason5lee.resukt.andThen
 
 data class Command(
-    val creator: UserId,
-    val id: PostId,
-    val newContent: PostContent,
+  val creator: UserId,
+  val id: PostId,
+  val newContent: PostContent,
 )
 
 interface EditPost : suspend (Command) -> Result<Unit, Failure> {
@@ -23,10 +21,11 @@ interface EditPost : suspend (Command) -> Result<Unit, Failure> {
     }
 
   suspend fun checkCreatorAndPostType(
-      post: PostId,
-      expectedCreator: UserId,
-      content: PostContent,
+    post: PostId,
+    expectedCreator: UserId,
+    content: PostContent,
   ): Result<Unit, Failure>
+
   suspend fun updatePost(post: PostId, newContent: PostContent): Result<Unit, Failure>
 }
 

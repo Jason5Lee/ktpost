@@ -1,18 +1,18 @@
 package me.jason5lee.ktpost.listPostsByCreator
 
 import me.jason5lee.ktpost.common.*
-import me.jason5lee.resukt.*
+import me.jason5lee.resukt.Result
 
 data class Query(
-    val creator: UserId,
-    val offset: Offset,
-    val size: Size,
+  val creator: UserId,
+  val offset: Offset,
+  val size: Size,
 )
 
 data class PostInfo(
-    val id: PostId,
-    val title: PostTitle,
-    val creation: Time,
+  val id: PostId,
+  val title: PostTitle,
+  val creation: Time,
 )
 
 interface ListPostByCreator : suspend (Query) -> Result<List<PostInfo>, Failure>

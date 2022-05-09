@@ -2,7 +2,7 @@ package me.jason5lee.ktpost.createPost
 
 import io.vertx.core.json.Json
 import me.jason5lee.ktpost.common.*
-import me.jason5lee.resukt.*
+import me.jason5lee.resukt.getOrElse
 
 internal fun createPostApi(createPost: CreatePost, auth: Auth) = api(
   path = { put("/post") },
@@ -27,12 +27,18 @@ internal fun createPostApi(createPost: CreatePost, auth: Auth) = api(
       req.post == null && req.url != null -> PostContent.Url.create(req.url).getOrElse { reason ->
         return@api ctx.respondJson(statusCode = 422, FailureBody(field = "url", reason = reason))
       }
-      else -> return@api ctx.respondJson(statusCode = 400, FailureBody(reason = "url and post should present exact once"))
+      else -> return@api ctx.respondJson(
+        statusCode = 400,
+        FailureBody(reason = "url and post should present exact once")
+      )
     }
   )
   val output = createPost(input).getOrElse { failure ->
-    when(failure) {
-      Failure.DuplicatedTitle -> return@api ctx.respondJson(statusCode = 409, FailureBody(field = "title", reason = "duplicated title"))
+    when (failure) {
+      Failure.DuplicatedTitle -> return@api ctx.respondJson(
+        statusCode = 409,
+        FailureBody(field = "title", reason = "duplicated title")
+      )
     }
   }
 
@@ -44,7 +50,9 @@ internal fun createPostApi(createPost: CreatePost, auth: Auth) = api(
   class ResponseDto(
     val postId: String,
   )
-  ctx.json(ResponseDto(
-    postId = postId
-  ))
+  ctx.json(
+    ResponseDto(
+      postId = postId
+    )
+  )
 }

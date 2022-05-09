@@ -16,10 +16,12 @@ internal fun getIdentityApi(getIdentity: GetIdentity, auth: Auth) = api(
     val id: String,
     val name: String,
   )
+
   @Suppress("unused")
   class AdminDto(
     val id: String,
   )
+
   @Suppress("unused")
   @JsonInclude(JsonInclude.Include.NON_NULL)
   class ResponseDto(

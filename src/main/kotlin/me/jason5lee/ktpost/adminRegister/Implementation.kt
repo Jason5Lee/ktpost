@@ -4,9 +4,7 @@ import com.relops.snowflake.Snowflake
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.AdminId
-import me.jason5lee.ktpost.common.Encryptor
-import me.jason5lee.ktpost.common.Password
+import me.jason5lee.ktpost.common.*
 
 class Implementation(private val mysql: MySQLPool, private val encryptor: Encryptor, private val snowflake: Snowflake) :
   AdminRegister {

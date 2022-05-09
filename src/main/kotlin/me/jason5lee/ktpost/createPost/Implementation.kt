@@ -4,10 +4,9 @@ import com.relops.snowflake.Snowflake
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.PostContent
-import me.jason5lee.ktpost.common.PostId
-import java.time.Instant
+import me.jason5lee.ktpost.common.*
 import me.jason5lee.resukt.Result
+import java.time.Instant
 
 class Implementation(val mysql: MySQLPool, val snowflake: Snowflake) : CreatePost {
   override suspend fun invoke(command: Command): Result<PostId, Failure> {
@@ -26,8 +25,10 @@ class Implementation(val mysql: MySQLPool, val snowflake: Snowflake) : CreatePos
     }
 
     try {
-      mysql.preparedQuery("INSERT INTO posts (post_id, creator, creation_time, title, url, post) " +
-        "VALUES (?,?,?,?,?,?)")
+      mysql.preparedQuery(
+        "INSERT INTO posts (post_id, creator, creation_time, title, url, post) " +
+          "VALUES (?,?,?,?,?,?)"
+      )
         .execute(Tuple.of(id, command.creator.value, Instant.now().toEpochMilli(), command.title.value, url, post))
         .await()
     } catch (e: Exception) {

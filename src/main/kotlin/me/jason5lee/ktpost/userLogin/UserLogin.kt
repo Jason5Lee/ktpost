@@ -1,13 +1,12 @@
 package me.jason5lee.ktpost.userLogin
 
-import me.jason5lee.ktpost.common.Password
-import me.jason5lee.ktpost.common.UserId
-import me.jason5lee.ktpost.common.UserName
-import me.jason5lee.resukt.*
+import me.jason5lee.ktpost.common.*
+import me.jason5lee.resukt.Result
+import me.jason5lee.resukt.whenFailure
 
 data class Query(
-    val userName: UserName,
-    val password: Password,
+  val userName: UserName,
+  val password: Password,
 )
 
 interface UserLogin : suspend (Query) -> Result<UserId, Failure> {
@@ -24,6 +23,6 @@ interface UserLogin : suspend (Query) -> Result<UserId, Failure> {
   suspend fun getUserIdAndEncryptedPasswordByName(userName: UserName): Result<Pair<UserId, String>, Failure>
 }
 
-sealed class Failure {
-  object UserNameOrPasswordIncorrect : Failure()
+enum class Failure {
+  UserNameOrPasswordIncorrect
 }

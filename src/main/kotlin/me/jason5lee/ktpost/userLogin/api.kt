@@ -13,6 +13,7 @@ fun userLoginApi(userLogin: UserLogin, auth: Auth) = api(
     val userName: String,
     val password: String,
   )
+
   val req = Json.decodeValue(ctx.bodyAsString, RequestDto::class.java)
   val input = Query(
     userName = UserName.new(req.userName)
@@ -33,14 +34,16 @@ fun userLoginApi(userLogin: UserLogin, auth: Auth) = api(
   val idResp = formatId(output.value)
 
   val expire = auth.getExpireTime()
-  ctx.json(ResponseDto(
-    userId = idResp,
-    expire = expire,
-    token = auth.generateToken(
-      exp = expire,
+  ctx.json(
+    ResponseDto(
       userId = idResp,
+      expire = expire,
+      token = auth.generateToken(
+        exp = expire,
+        userId = idResp,
+      )
     )
-  ))
+  )
 }
 
 private suspend fun RoutingContext.respondInvalidUserName(reason: String) {

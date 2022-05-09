@@ -4,7 +4,7 @@ import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
 import me.jason5lee.ktpost.common.*
-import me.jason5lee.resukt.*
+import me.jason5lee.resukt.Result
 
 class Implementation(val mysql: MySQLPool) : GetPost {
   override suspend fun invoke(input: Query): Result<PostInfoForPage, Failure> {
@@ -28,13 +28,13 @@ class Implementation(val mysql: MySQLPool) : GetPost {
     val creatorName = userRow.getStringModel("user_name") { UserName.new(it) }
 
     return Result.success(
-        PostInfoForPage(
-      creator = CreatorInfo(name = creatorName, id = creatorId),
-      creation = creationTime,
-      lastModified = lastModified,
-      title = title,
-      content = postContent,
-    )
+      PostInfoForPage(
+        creator = CreatorInfo(name = creatorName, id = creatorId),
+        creation = creationTime,
+        lastModified = lastModified,
+        title = title,
+        content = postContent,
+      )
     )
   }
 }

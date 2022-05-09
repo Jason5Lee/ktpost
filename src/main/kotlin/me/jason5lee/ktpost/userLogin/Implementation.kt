@@ -3,11 +3,8 @@ package me.jason5lee.ktpost.userLogin
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.UserId
-import me.jason5lee.ktpost.common.UserName
-import me.jason5lee.ktpost.common.getNonNullLong
-import me.jason5lee.ktpost.common.getNonNullString
-import me.jason5lee.resukt.*
+import me.jason5lee.ktpost.common.*
+import me.jason5lee.resukt.Result
 
 class Implementation(private val mysql: MySQLPool) : UserLogin {
   override suspend fun getUserIdAndEncryptedPasswordByName(userName: UserName): Result<Pair<UserId, String>, Failure> {

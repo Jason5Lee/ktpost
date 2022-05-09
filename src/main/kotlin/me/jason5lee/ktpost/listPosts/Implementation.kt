@@ -11,9 +11,11 @@ class Implementation(private val logger: mu.KLogger, private val mysql: MySQLPoo
       .execute(Tuple.of(query.offset.value, query.size.value))
       .await()
 
-    val userId2Name = mysql.query("SELECT user_id, user_name FROM users WHERE user_id IN (${
-      postRows.asSequence().map { it.getNonNullLong("creator") }.joinToString(",")
-    })")
+    val userId2Name = mysql.query(
+      "SELECT user_id, user_name FROM users WHERE user_id IN (${
+        postRows.asSequence().map { it.getNonNullLong("creator") }.joinToString(",")
+      })"
+    )
       .execute()
       .await()
       .associate { row -> row.getNonNullLong("user_id") to row.getStringModel("user_name") { UserName.new(it) } }
@@ -25,8 +27,10 @@ class Implementation(private val logger: mu.KLogger, private val mysql: MySQLPoo
           title = row.getStringModel("title") { PostTitle.new(it) },
           creator = Creator(
             id = UserId(row.getNonNullLong("creator")),
-            name = userId2Name[row.getNonNullLong("creator")] ?:
-            row.throwInvalidInDB("creator", "creator not found in users")
+            name = userId2Name[row.getNonNullLong("creator")] ?: row.throwInvalidInDB(
+              "creator",
+              "creator not found in users"
+            )
           ),
           creation = Time(utc = row.getNonNullLong("creation_time")),
         )

@@ -3,17 +3,14 @@ package me.jason5lee.ktpost.editPost
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.PostContent
-import me.jason5lee.ktpost.common.PostId
-import me.jason5lee.ktpost.common.UserId
-import me.jason5lee.ktpost.common.getNonNullLong
+import me.jason5lee.ktpost.common.*
 import me.jason5lee.resukt.Result
 
 class Implementation(private val mysql: MySQLPool) : EditPost {
   override suspend fun checkCreatorAndPostType(
-      post: PostId,
-      expectedCreator: UserId,
-      content: PostContent
+    post: PostId,
+    expectedCreator: UserId,
+    content: PostContent
   ): Result<Unit, Failure> {
     val postRow = mysql.preparedQuery("SELECT creator,post,url FROM posts WHERE post_id=?")
       .execute(Tuple.of(post.value))

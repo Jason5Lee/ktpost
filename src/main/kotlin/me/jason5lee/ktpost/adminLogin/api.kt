@@ -35,12 +35,14 @@ internal fun adminLoginApi(adminLogin: AdminLogin, auth: Auth) = api(
   )
 
   val expire = auth.getExpireTime()
-  ctx.json(ResponseDto(
-    expire = expire,
-    token = auth.generateToken(
-      exp = expire,
-      adminId = req.id,
+  ctx.json(
+    ResponseDto(
+      expire = expire,
+      token = auth.generateToken(
+        exp = expire,
+        adminId = req.id,
+      )
     )
-  ))
+  )
 }
 

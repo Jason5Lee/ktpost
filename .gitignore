@@ -185,4 +185,4 @@ nbdist/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-src/main/kotlin/me/jason5lee/ktpost/api/generated.kt
+src/main/kotlin/me/jason5lee/ktpost/generated.kt

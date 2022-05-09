@@ -3,7 +3,7 @@ package me.jason5lee.ktpost.adminLogin
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.getNonNullString
+import me.jason5lee.ktpost.common.*
 import me.jason5lee.resukt.Result
 
 class Implementation(private val mysql: MySQLPool) : AdminLogin {
@@ -13,7 +13,7 @@ class Implementation(private val mysql: MySQLPool) : AdminLogin {
       .await()
       .let { rows ->
         val row = rows.firstOrNull() ?: return Result.failure(Failure.IdOrPasswordIncorrect)
-        return  if (command.password.verifyEncrypted(row.getNonNullString("password"))) {
+        return if (command.password.verifyEncrypted(row.getNonNullString("password"))) {
           Result.success(Unit)
         } else Result.failure(Failure.IdOrPasswordIncorrect)
       }

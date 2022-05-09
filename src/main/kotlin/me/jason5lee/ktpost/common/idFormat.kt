@@ -1,8 +1,8 @@
 package me.jason5lee.ktpost.common
 
 
-import java.util.*
 import me.jason5lee.resukt.Result
+import java.util.*
 
 private val base64Decoder = Base64.getUrlDecoder()
 private val base64Encoder = Base64.getUrlEncoder().withoutPadding()

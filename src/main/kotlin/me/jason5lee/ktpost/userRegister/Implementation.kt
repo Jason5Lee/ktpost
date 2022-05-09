@@ -5,9 +5,8 @@ import com.relops.snowflake.Snowflake
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.Encryptor
-import me.jason5lee.ktpost.common.UserId
-import me.jason5lee.resukt.*
+import me.jason5lee.ktpost.common.*
+import me.jason5lee.resukt.Result
 import me.jason5lee.resukt.ext.asFailure
 import java.time.Instant
 
@@ -25,7 +24,7 @@ class Implementation(private val mysql: MySQLPool, private val encryptor: Encryp
     } catch (e: io.vertx.mysqlclient.MySQLException) {
       e.message?.let { msg ->
         if (msg.contains("Duplicate entry") && msg.contains("for key 'idx_user_name'")) {
-            return Failure.UserNameExists.asFailure()
+          return Failure.UserNameExists.asFailure()
         }
       }
       throw e

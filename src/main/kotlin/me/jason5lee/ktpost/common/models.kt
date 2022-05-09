@@ -1,7 +1,7 @@
 package me.jason5lee.ktpost.common
 
+import me.jason5lee.resukt.Result
 import java.net.URL
-import me.jason5lee.resukt.*
 
 @JvmInline
 value class Time(val utc: Long)
@@ -52,6 +52,7 @@ value class Password private constructor(private val plain: String) {
 
 @JvmInline
 value class PostId(val value: Long)
+
 @JvmInline
 value class PostTitle private constructor(val value: String) {
   companion object {
@@ -64,9 +65,9 @@ value class PostTitle private constructor(val value: String) {
 }
 
 sealed class PostContent {
-  data class Post(val text: String): PostContent()
+  data class Post(val text: String) : PostContent()
 
-  data class Url(val url: URL): PostContent() {
+  data class Url(val url: URL) : PostContent() {
     companion object {
       fun create(value: String): Result<Url, String> = try {
         Result.success(Url(URL(value)))

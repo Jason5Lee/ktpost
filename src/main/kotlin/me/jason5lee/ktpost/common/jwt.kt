@@ -4,7 +4,8 @@ import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.jwt.JWTAuth
 import io.vertx.ext.web.RoutingContext
 import io.vertx.kotlin.coroutines.await
-import me.jason5lee.resukt.*
+import me.jason5lee.resukt.Result
+import me.jason5lee.resukt.fold
 import java.time.Instant
 
 class Auth(
@@ -81,7 +82,8 @@ class Auth(
   }
 
   suspend fun authUserOnly(ctx: RoutingContext): Result<UserId, AuthFailure> {
-    val headerContent = ctx.request().headers().get("Authorization") ?: return Result.failure(AuthFailure.Unauthenticated)
+    val headerContent =
+      ctx.request().headers().get("Authorization") ?: return Result.failure(AuthFailure.Unauthenticated)
     if (!headerContent.startsWith("Bearer ")) {
       return Result.failure(AuthFailure.Unauthenticated)
     }

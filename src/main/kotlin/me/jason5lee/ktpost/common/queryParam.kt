@@ -1,7 +1,7 @@
 package me.jason5lee.ktpost.common
 
 import io.vertx.ext.web.RoutingContext
-import me.jason5lee.resukt.*
+import me.jason5lee.resukt.Result
 
 fun RoutingContext.getQueryParamOptionalInt(name: String): Result<Int?, String> {
   val values = queryParam(name)

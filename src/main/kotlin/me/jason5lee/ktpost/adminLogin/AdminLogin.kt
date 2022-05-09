@@ -1,8 +1,7 @@
 package me.jason5lee.ktpost.adminLogin
 
-import me.jason5lee.ktpost.common.AdminId
-import me.jason5lee.ktpost.common.Password
-import me.jason5lee.resukt.*
+import me.jason5lee.ktpost.common.*
+import me.jason5lee.resukt.Result
 
 data class Command(
   val id: AdminId,

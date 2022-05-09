@@ -22,7 +22,7 @@ internal fun listPostsByCreatorApi(listPostByCreator: ListPostByCreator) = api(
   )
 
   val posts = listPostByCreator(query).getOrElse {
-    return@api when(it) {
+    return@api when (it) {
       Failure.CreatorNotFound -> ctx.respondUserNotFound()
     }
   }
@@ -37,5 +37,8 @@ internal fun listPostsByCreatorApi(listPostByCreator: ListPostByCreator) = api(
   ctx.json(posts.map { PostInfoDto(formatId(it.id.value), it.title.value, it.creation.utc) })
 }
 
-private suspend fun RoutingContext.respondNoUserId() = respondJson(400, FailureBody(field = "userId", reason = "no userId"))
-private suspend fun RoutingContext.respondUserNotFound() = respondJson(404, FailureBody(field = "userId", reason = "user not found"))
+private suspend fun RoutingContext.respondNoUserId() =
+  respondJson(400, FailureBody(field = "userId", reason = "no userId"))
+
+private suspend fun RoutingContext.respondUserNotFound() =
+  respondJson(404, FailureBody(field = "userId", reason = "user not found"))

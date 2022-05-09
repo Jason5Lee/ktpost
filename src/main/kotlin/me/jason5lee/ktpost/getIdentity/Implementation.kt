@@ -3,9 +3,7 @@ package me.jason5lee.ktpost.getIdentity
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.UserId
-import me.jason5lee.ktpost.common.UserName
-import me.jason5lee.ktpost.common.getStringModel
+import me.jason5lee.ktpost.common.*
 
 class Implementation(private val mysql: MySQLPool) : GetIdentity {
   override suspend fun getUserName(id: UserId): UserName =

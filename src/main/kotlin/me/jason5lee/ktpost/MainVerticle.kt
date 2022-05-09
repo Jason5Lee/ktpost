@@ -12,13 +12,11 @@ import io.vertx.ext.web.Router
 import io.vertx.kotlin.coroutines.CoroutineVerticle
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
-import me.jason5lee.ktpost.common.Auth
-import me.jason5lee.ktpost.common.Dependencies
-import me.jason5lee.ktpost.common.Encryptor
+import me.jason5lee.ktpost.common.*
 import mu.KotlinLogging
 
 class MainVerticle : CoroutineVerticle() {
-  override suspend fun start()  {
+  override suspend fun start() {
     System.setProperty("org.vertx.logger-delegate-factory-class-name", SLF4JLogDelegateFactory::class.java.name)
     DatabindCodec.mapper().registerKotlinModule()
     DatabindCodec.prettyMapper().registerKotlinModule()
@@ -31,10 +29,14 @@ class MainVerticle : CoroutineVerticle() {
     val expireSecs = config.getLong("expireSecs", 60 * 30)
     val cost = config.getInteger("cost", 7)
 
-    val jwtAuth = JWTAuth.create(vertx, JWTAuthOptions()
-      .addPubSecKey(PubSecKeyOptions()
-        .setAlgorithm("HS256")
-        .setBuffer(secretConf)))
+    val jwtAuth = JWTAuth.create(
+      vertx, JWTAuthOptions()
+        .addPubSecKey(
+          PubSecKeyOptions()
+            .setAlgorithm("HS256")
+            .setBuffer(secretConf)
+        )
+    )
     val server = vertx.createHttpServer()
 
     val router = Router.router(vertx)

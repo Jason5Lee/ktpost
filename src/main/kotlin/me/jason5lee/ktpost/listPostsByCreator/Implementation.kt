@@ -4,7 +4,7 @@ import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
 import me.jason5lee.ktpost.common.*
-import me.jason5lee.resukt.*
+import me.jason5lee.resukt.Result
 
 class Implementation(private val mysql: MySQLPool) : ListPostByCreator {
   override suspend fun invoke(input: Query): Result<List<PostInfo>, Failure> {

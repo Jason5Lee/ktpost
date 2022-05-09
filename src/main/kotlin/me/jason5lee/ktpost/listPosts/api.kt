@@ -10,10 +10,10 @@ fun listPostsApi(listPosts: ListPosts) = api(
   val input = Query(
     offset = ctx.getQueryParamOptionalInt("offset")
       .andThen { Offset.new(it) }
-      .getOrElse { return@api ctx.respondJson(400, FailureBody(field = "offset", reason = it )) },
+      .getOrElse { return@api ctx.respondJson(400, FailureBody(field = "offset", reason = it)) },
     size = ctx.getQueryParamInt("size")
       .andThen { Size.new(it) }
-      .getOrElse { return@api ctx.respondJson(400, FailureBody(field = "size", reason = it )) },
+      .getOrElse { return@api ctx.respondJson(400, FailureBody(field = "size", reason = it)) },
   )
   val output = listPosts(input)
 

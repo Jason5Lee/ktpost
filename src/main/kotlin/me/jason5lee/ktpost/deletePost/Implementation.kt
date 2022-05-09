@@ -3,9 +3,7 @@ package me.jason5lee.ktpost.deletePost
 import io.vertx.kotlin.coroutines.await
 import io.vertx.mysqlclient.MySQLPool
 import io.vertx.sqlclient.Tuple
-import me.jason5lee.ktpost.common.PostId
-import me.jason5lee.ktpost.common.UserId
-import me.jason5lee.ktpost.common.getNonNullLong
+import me.jason5lee.ktpost.common.*
 import me.jason5lee.resukt.Result
 
 class Implementation(private val mysql: MySQLPool) : DeletePost {

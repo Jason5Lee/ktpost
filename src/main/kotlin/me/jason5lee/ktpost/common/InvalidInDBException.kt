@@ -5,8 +5,10 @@ import me.jason5lee.resukt.getOrElse
 
 fun io.vertx.sqlclient.Row.throwInvalidInDB(column: String, reason: String): Nothing =
   throw Exception("invalid value found in DB, column=`$column` row=`${this@throwInvalidInDB}`: $reason")
+
 fun io.vertx.sqlclient.Row.getNonNullString(column: String): String =
-  getString(column) ?: throw Exception("invalid value found in DB, column=`$column` row=`${this@getNonNullString}`: value is null")
+  getString(column)
+    ?: throw Exception("invalid value found in DB, column=`$column` row=`${this@getNonNullString}`: value is null")
 
 inline fun <R> io.vertx.sqlclient.Row.getStringModel(column: String, newModel: (String) -> Result<R, String>): R {
   val value = getNonNullString(column)
