@@ -19,6 +19,8 @@ CREATE TABLE posts (
 );
 CREATE INDEX idx_creator
 ON posts (creator);
+CREATE INDEX idx_last_modified
+ON posts (last_modified);
 
 CREATE TABLE admins (
     admin_id BIGINT UNSIGNED NOT NULL PRIMARY KEY,
