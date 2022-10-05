@@ -1,7 +1,7 @@
 # Ktpost
 
-The REST post service using vert.x, based on [the Domain Modeling idea from Scott Wlaschin](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
-and some of my immature ideas.
+The REST service that allows users to create, view and manage posts, using vert.x, based on [the Domain Modeling idea from Scott Wlaschin](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
+and some of my ideas.
 
 ## Deployment
 
@@ -66,8 +66,7 @@ If the invalidation is from the user input, it may respond a `422 Unprocessable 
 or `404 Not Found` for query condition.
 If the invalidation is from the databse, it responds a `500 Internal Server Error`.
 
-## What you should NOT learn from this project.
+## What you may NOT learn from this project.
 
 * How it does code generation. It may not be a good way but just works for this sample.
 * The authorization. It uses JWT token without refresh token.
-* REST API design. I'm not an expert of it so maybe some APIs are not designed according to the standard.
