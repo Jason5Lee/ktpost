@@ -1,5 +1,7 @@
 # Ktpost
 
+**Note: this project will NOT be maintained. [Here](https://github.com/Jason5Lee/post-project/tree/main/backend/services/post-ktor-mongo-fdm) is a similar project using ktor.**
+
 The REST service that allows users to create, view and manage posts, using vert.x, based on [the Domain Modeling idea from Scott Wlaschin](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/)
 and some of my ideas.
 
